@@ -13,12 +13,23 @@
     <title>All</title>
   </head>
   <body>
-    <% for(let user of users) { %>
+    <% if(users.length === 0) { %>
+    <h1>Pesanan kosong!</h1>
+    <% } %> <% for(let user of users) { %>
     <div class="box">
       <h2><%= user.name %></h2>
+      <p><%= user._id %></p>
       <p><%= user.email %></p>
       <p><%= user.phone %></p>
+      <div class="actions">
+        <form method="post" action="/all/<%= user._id %>">
+          <button type="submit">Hapus</button>
+        </form>
+      </div>
     </div>
     <% } %>
+    <a href="https://bang-ridho-strawberry.up.railway.app/"
+      >Kembali ke Homepage</a
+    >
   </body>
 </html>

@@ -29,16 +29,21 @@ app.get("/all", async (req, res) => {
   const users = await User.find({});
   res.render("all", { users });
 });
+app.post("/all/:id", async (req, res) => {
+  const { id } = req.params;
+  await User.findByIdAndDelete(id);
+  res.redirect("/all");
+});
 app.post("/", async (req, res) => {
   const { name, email, phone } = req.body;
   if (!name || !email || !phone) {
     res.redirect("/#beli");
   } else {
-    const user = await User.insertMany(req.body);
+    await User.insertMany(req.body);
     res.render("success");
   }
 });
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log("Listening on port 5000!");
+  console.log("Listening on port 3000!");
 });
